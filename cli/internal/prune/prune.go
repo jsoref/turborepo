@@ -253,7 +253,7 @@ func (c *PruneCommand) Run(args []string) int {
 	output, err := os.Create(filepath.Join(pruneOptions.cwd, "out", "yarn-tmp.lock"))
 	writer := bufio.NewWriter(output)
 	if err != nil {
-		c.logError(c.Config.Logger, "", fmt.Errorf("Failed create tempory lockfile: %w", err))
+		c.logError(c.Config.Logger, "", fmt.Errorf("Failed create temporary lockfile: %w", err))
 	}
 	defer output.Close()
 
