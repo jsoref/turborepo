@@ -41,7 +41,7 @@ func (c *ColorCache) PrefixColor(name string) colorFn {
 	return colorFn
 }
 
-// postitiveMod returns a modulo operator like JavaScripts
+// positiveMod returns a modulo operator like JavaScripts
 func positiveMod(x, d int) int {
 	x = x % d
 	if x >= 0 {
