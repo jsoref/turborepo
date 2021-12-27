@@ -34,7 +34,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-const TOPOLOGICAL_PIPELINE_DELMITER = "^"
+const TOPOLOGICAL_PIPELINE_DELIMITER = "^"
 
 // RunCommand is a Command implementation that tells Turbo to run a task
 type RunCommand struct {
@@ -244,7 +244,7 @@ func (c *RunCommand) Run(args []string) int {
 			}
 			c.Config.Logger.Debug("dependents", "pkg", pkg, "value", descenders.List())
 			for _, d := range descenders {
-				// we need to exlcude the fake root node
+				// we need to exclude the fake root node
 				// since it is not a real package
 				if d != ctx.RootNode {
 					filteredPkgs.Add(d)
@@ -263,7 +263,7 @@ func (c *RunCommand) Run(args []string) int {
 			}
 			c.Config.Logger.Debug("dependencies", "pkg", pkg, "value", ancestors.List())
 			for _, d := range ancestors {
-				// we need to exlcude the fake root node
+				// we need to exclude the fake root node
 				// since it is not a real package
 				if d != ctx.RootNode {
 					filteredPkgs.Add(d)
@@ -309,7 +309,7 @@ func (c *RunCommand) Run(args []string) int {
 		if err != nil {
 			log.Printf("[ERROR] %v: error computing combined hash", pack.Name)
 		}
-		c.Config.Logger.Debug(fmt.Sprintf("%v: package anscestralHash", pack.Name), "hash", ancestralHashes)
+		c.Config.Logger.Debug(fmt.Sprintf("%v: package ancestralHash", pack.Name), "hash", ancestralHashes)
 		c.Config.Logger.Debug(fmt.Sprintf("%v: package hash", pack.Name), "hash", pack.Hash)
 	}
 
@@ -351,7 +351,7 @@ func (c *RunCommand) Run(args []string) int {
 				if core.IsPackageTask(from) {
 					engine.AddDep(from, taskName)
 					continue
-				} else if strings.Contains(from, TOPOLOGICAL_PIPELINE_DELMITER) {
+				} else if strings.Contains(from, TOPOLOGICAL_PIPELINE_DELIMITER) {
 					topoDeps.Add(from[1:])
 				} else {
 					deps.Add(from)
@@ -361,7 +361,7 @@ func (c *RunCommand) Run(args []string) int {
 			taskName = id
 		} else {
 			for _, from := range value.DependsOn {
-				if strings.Contains(from, TOPOLOGICAL_PIPELINE_DELMITER) {
+				if strings.Contains(from, TOPOLOGICAL_PIPELINE_DELIMITER) {
 					topoDeps.Add(from[1:])
 				} else {
 					deps.Add(from)
@@ -688,7 +688,7 @@ type RunOptions struct {
 	includeDependents bool
 	// Whether to include includeDependencies (pkg.dependencies) in execution (defaults to false)
 	includeDependencies bool
-	// List of globs of file paths to ignore from exection scope calculation
+	// List of globs of file paths to ignore from execution scope calculation
 	ignore []string
 	// Whether to stream log outputs
 	stream bool
