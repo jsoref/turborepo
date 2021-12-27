@@ -125,7 +125,7 @@ func WithGraph(rootpath string, config *config.Config) Option {
 			c.Backend = backend
 		}
 
-		// this should go into the bacend abstraction
+		// this should go into the backend abstraction
 		if c.Backend.Name == "nodejs-yarn" {
 			lockfile, err := fs.ReadLockfile(config.Cache.Dir)
 			if err != nil {
