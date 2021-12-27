@@ -60,7 +60,7 @@ type SchedulerExecutionOptions struct {
 	TasksOnly bool
 }
 
-// Execute executes the pipeline, constructing an internal task graph and walking it accordlingly.
+// Execute executes the pipeline, constructing an internal task graph and walking it accordingly.
 func (p *scheduler) Prepare(options *SchedulerExecutionOptions) error {
 	pkgs := options.Packages
 	if len(pkgs) == 0 {
