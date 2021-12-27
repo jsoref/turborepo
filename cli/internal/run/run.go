@@ -34,7 +34,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-const TOPOLOGICAL_PIPELINE_DELMITER = "^"
+const TOPOLOGICAL_PIPELINE_DELIMITER = "^"
 
 // RunCommand is a Command implementation that tells Turbo to run a task
 type RunCommand struct {
@@ -351,7 +351,7 @@ func (c *RunCommand) Run(args []string) int {
 				if core.IsPackageTask(from) {
 					engine.AddDep(from, taskName)
 					continue
-				} else if strings.Contains(from, TOPOLOGICAL_PIPELINE_DELMITER) {
+				} else if strings.Contains(from, TOPOLOGICAL_PIPELINE_DELIMITER) {
 					topoDeps.Add(from[1:])
 				} else {
 					deps.Add(from)
@@ -361,7 +361,7 @@ func (c *RunCommand) Run(args []string) int {
 			taskName = id
 		} else {
 			for _, from := range value.DependsOn {
-				if strings.Contains(from, TOPOLOGICAL_PIPELINE_DELMITER) {
+				if strings.Contains(from, TOPOLOGICAL_PIPELINE_DELIMITER) {
 					topoDeps.Add(from[1:])
 				} else {
 					deps.Add(from)
